@@ -24,7 +24,7 @@
             <div class="card-body p-4">
                 <form id="referral-form">
                     <!-- Referrer Section -->
-                    <h4 class="mb-3" id="referrer-title">Referrer (TP Employee)</h4>
+                    <h4 class="mb-3" id="referrer-title">Employee Information</h4>
 
                     <!-- Language Selection -->
                     <div class="mb-3">
@@ -41,6 +41,12 @@
                         </select>
                     </div>
 
+                    <!-- Name Input -->
+                    <div class="mb-3" id="employee-name-container">
+                        <label id="employee-name-label" for="employee-name" class="form-label">Employee Name:</label>
+                        <input type="text" id="employee-name" class="form-control" placeholder="Please Enter Your Full Name">
+                    </div>
+                   
                     <!-- BMS ID Input -->
                     <div class="mb-3" id="bms-id-container">
                         <label id="bms-label" for="bms-id" class="form-label">BMS Employee ID:</label>
@@ -80,12 +86,24 @@
                     </div>
 
                     <div class="mb-3">
+                        <label id="job-label" for="referral-job" class="form-label">Preferred Job Role:</label>
+                        <select id="referral-job" class="form-select">
+                            <option value="">Select a role</option>
+                            <option value="Customer Service Representative">Customer Service Representative</option>
+                            <option value="Interpreter">Interpreter</option>
+                            <option value="Operations Customer Expert">Operations Customer Expert</option>
+                            <option value="Content Moderator">Content Moderator</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label id="location-label" for="referral-location" class="form-label">Preferred Location:</label>
                         <select id="referral-location" class="form-select">
                             <option value="">Select a location</option>
                             <option value="Penang">Penang</option>
                             <option value="Kuala Lumpur">Kuala Lumpur</option>
                             <option value="Johor">Johor</option>
+                            <option value="Thailand">Bangkok</option>
                         </select>
                     </div>
 
@@ -114,4 +132,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
