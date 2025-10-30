@@ -15,6 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
         status: document.getElementById('status')
     };
 
+    // ✅ Validation functions
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function validatePhoneNumber(phone) {
+        const cleanedPhone = phone.replace(/\D/g, '');
+        return cleanedPhone.length >= 9 && cleanedPhone.length <= 12;
+    }
+
+    function validateBMSID(bmsId) {
+        const cleanedId = bmsId.trim();
+        return /^\d{6,7}$/.test(cleanedId);
+    }
+
     // ✅ Simplified translations
     const translations = {
         english: {
@@ -32,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
             error: "⚠️ Please fill out all fields before submitting.",
             sending: "⏳ Submitting your referral...",
             empTitle: "Employee Information",
-            refTitle: "Referral Information"
+            refTitle: "Referral Information",
+            invalidEmail: "Please enter a valid email address (e.g., example@email.com)",
+            invalidPhone: "Please enter a valid phone number (9-12 digits)",
+            invalidBMS: "Please enter a valid 6 or 7 digit BMS ID"
         },
         malay: {
             langSelect: "Sila pilih bahasa pilihan anda",
@@ -49,7 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
             empnameLabel: "Nama Pekerja", 
             jobLabel: "Jawatan Pilihan",
             empTitle: "Maklumat Pekerja",
-            refTitle: "Maklumat Rujukan"
+            refTitle: "Maklumat Rujukan",
+            invalidEmail: "Sila masukkan alamat emel yang sah (cth: contoh@email.com)",
+            invalidPhone: "Sila masukkan nombor telefon yang sah (9-12 digit)",
+            invalidBMS: "Sila masukkan ID BMS yang sah (6 atau 7 digit)"
         },
         thai: {
             langSelect: "กรุณาเลือกภาษาที่คุณต้องการ",
@@ -66,7 +88,10 @@ document.addEventListener('DOMContentLoaded', function () {
             empnameLabel: "ชื่อพนักงาน", 
             jobLabel: "ตำแหน่งงานที่ต้องการ",
             empTitle: "ข้อมูลพนักงาน",
-            refTitle: "ข้อมูลผู้แนะนำ"
+            refTitle: "ข้อมูลผู้แนะนำ",
+            invalidEmail: "กรุณากรอกอีเมลที่ถูกต้อง (เช่น example@email.com)",
+            invalidPhone: "กรุณากรอกเบอร์โทรที่ถูกต้อง (9-12 หลัก)",
+            invalidBMS: "กรุณากรอกรหัส BMS ที่ถูกต้อง (6 หรือ 7 หลัก)"
         },
         mandarin: {
             langSelect: "请选择您的首选语言",
@@ -83,7 +108,10 @@ document.addEventListener('DOMContentLoaded', function () {
             empnameLabel: "员工姓名", 
             jobLabel: "首选职位",
             empTitle: "员工信息",
-            refTitle: "推荐人信息"
+            refTitle: "推荐人信息",
+            invalidEmail: "请输入有效的电子邮件地址（例如：example@email.com）",
+            invalidPhone: "请输入有效的电话号码（9-12位数字）",
+            invalidBMS: "请输入有效的BMS员工编号（6或7位数字）"
         },
         japanese: {
             langSelect: "希望の言語を選択してください",
@@ -100,7 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
             empnameLabel: "従業員名", 
             jobLabel: "希望する職種",
             empTitle: "従業員情報",
-            refTitle: "紹介者情報"
+            refTitle: "紹介者情報",
+            invalidEmail: "有効なメールアドレスを入力してください（例：example@email.com）",
+            invalidPhone: "有効な電話番号を入力してください（9〜12桁）",
+            invalidBMS: "有効なBMS社員IDを入力してください（6桁または7桁）"
         },
         korean: {
             langSelect: "선호하는 언어를 선택하세요",
@@ -117,9 +148,68 @@ document.addEventListener('DOMContentLoaded', function () {
             empnameLabel: "직원 이름", 
             jobLabel: "선호 직무",
             empTitle: "직원 정보",
-            refTitle: "추천인 정보"
+            refTitle: "추천인 정보",
+            invalidEmail: "유효한 이메일 주소를 입력하세요 (예: example@email.com)",
+            invalidPhone: "유효한 전화번호를 입력하세요 (9-12자리)",
+            invalidBMS: "유효한 BMS 직원 ID를 입력하세요 (6자리 또는 7자리)"
         }
     };
+
+    // ✅ Show error message for specific field
+    function showFieldError(input, message) {
+        input.classList.add('is-invalid');
+        let feedback = input.nextElementSibling;
+        if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+            feedback = document.createElement('div');
+            feedback.className = 'invalid-feedback';
+            input.parentNode.appendChild(feedback);
+        }
+        feedback.textContent = message;
+    }
+
+    // ✅ Clear error message for specific field
+    function clearFieldError(input) {
+        input.classList.remove('is-invalid');
+    }
+
+    // ✅ Real-time validation for email
+    elements.emailInput.addEventListener('blur', function() {
+        const email = this.value.trim();
+        const lang = elements.pageLangSelect.value;
+        const t = translations[lang];
+        
+        if (email && !validateEmail(email)) {
+            showFieldError(this, t.invalidEmail);
+        } else {
+            clearFieldError(this);
+        }
+    });
+
+    // ✅ Real-time validation for phone
+    elements.phoneInput.addEventListener('blur', function() {
+        const phone = this.value.trim();
+        const lang = elements.pageLangSelect.value;
+        const t = translations[lang];
+        
+        if (phone && !validatePhoneNumber(phone)) {
+            showFieldError(this, t.invalidPhone);
+        } else {
+            clearFieldError(this);
+        }
+    });
+
+    // ✅ Real-time validation for BMS ID
+    elements.bmsIdInput.addEventListener('blur', function() {
+        const bmsId = this.value.trim();
+        const lang = elements.pageLangSelect.value;
+        const t = translations[lang];
+        
+        if (bmsId && !validateBMSID(bmsId)) {
+            showFieldError(this, t.invalidBMS);
+        } else {
+            clearFieldError(this);
+        }
+    });
 
     // ✅ Update UI text when language changes
     function updateLanguage(lang) {
@@ -167,10 +257,47 @@ document.addEventListener('DOMContentLoaded', function () {
             location: elements.locationSelect.value
         };
 
+        // Clear previous errors
+        clearFieldError(elements.bmsIdInput);
+        clearFieldError(elements.emailInput);
+        clearFieldError(elements.phoneInput);
+
         // Validation
+        let isValid = true;
+
+        // Check required fields
         if (Object.values(payload).some(v => !v)) {
             elements.status.textContent = t.error;
             elements.status.style.color = "red";
+            return;
+        }
+
+        // Validate BMS ID
+        if (!validateBMSID(payload.bmsId)) {
+            showFieldError(elements.bmsIdInput, t.invalidBMS);
+            elements.status.textContent = t.invalidBMS;
+            elements.status.style.color = "red";
+            isValid = false;
+        }
+
+        // Validate email
+        if (!validateEmail(payload.email)) {
+            showFieldError(elements.emailInput, t.invalidEmail);
+            elements.status.textContent = t.invalidEmail;
+            elements.status.style.color = "red";
+            isValid = false;
+        }
+
+        // Validate phone number
+        if (!validatePhoneNumber(payload.phone)) {
+            showFieldError(elements.phoneInput, t.invalidPhone);
+            elements.status.textContent = t.invalidPhone;
+            elements.status.style.color = "red";
+            isValid = false;
+        }
+
+        // Stop if validation fails
+        if (!isValid) {
             return;
         }
 

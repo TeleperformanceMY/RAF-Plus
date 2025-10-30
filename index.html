@@ -8,16 +8,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="TPLogo11.png" type="image/png">
+    <link rel="icon" href="TP white.png" type="image/png">
 </head>
 
 <body>
     <div class="container py-4">
-        <div class="text-center mb-4">
-            <img src="TPLogo11.png" alt="Teleperformance Logo" class="logo img-fluid" style="max-height: 80px;">
+        <div class="text-center">
+            <img src="TP white.png" alt="Teleperformance Logo" class="logo img-fluid" style="max-height: 80px;">
             <h1 class="mt-3">TP RAF+</h1>
             <p class="lead">Refer A Friend PLUS Program</p>
             <p class="lead">Employees Only</p>
+        </div>
+
+        <div class="banner-section text-center mb-4">
+            <img src="PrizeImage.png" alt="TP RAF+ Banner" class="banner-image img-fluid">
+
+            <div class="banner-text">
+                <h4 class="banner-title">
+                    REFER YOUR FRIENDS AND STAND A CHANCE TO WIN PRIZES WORTH RM20,000+!
+                </h4>
+                <p class="banner-details">
+                    <strong>RAF+ Refer and Bring a Friend for a Holiday:</strong> 1 Nov – 30 Nov 2025<br>
+                    <strong>RAF+ All Out Pro:</strong> 1 Dec – 31 Dec 2025
+                </p>
+            </div>
         </div>
 
         <div class="card shadow-sm">
@@ -44,9 +58,10 @@
                     <!-- Name Input -->
                     <div class="mb-3" id="employee-name-container">
                         <label id="employee-name-label" for="employee-name" class="form-label">Employee Name:</label>
-                        <input type="text" id="employee-name" class="form-control" placeholder="Please Enter Your Full Name">
+                        <input type="text" id="employee-name" class="form-control"
+                            placeholder="Please Enter Your Full Name">
                     </div>
-                   
+
                     <!-- BMS ID Input -->
                     <div class="mb-3" id="bms-id-container">
                         <label id="bms-label" for="bms-id" class="form-label">BMS Employee ID:</label>
@@ -61,21 +76,25 @@
 
                     <div class="mb-3">
                         <label id="name-label" for="referral-name" class="form-label">Referral's Name:</label>
-                        <input type="text" id="referral-name" class="form-control" placeholder="Enter referral’s full name">
+                        <input type="text" id="referral-name" class="form-control"
+                            placeholder="Enter referral’s full name">
                     </div>
 
                     <div class="mb-3">
                         <label id="email-label" for="referral-email" class="form-label">Referral's Email:</label>
-                        <input type="email" id="referral-email" class="form-control" placeholder="Enter referral’s email address">
+                        <input type="email" id="referral-email" class="form-control"
+                            placeholder="Enter referral’s email address">
                     </div>
 
                     <div class="mb-3">
                         <label id="phone-label" for="referral-phone" class="form-label">Referral's Phone Number:</label>
-                        <input type="tel" id="referral-phone" class="form-control" placeholder="Enter referral’s phone number">
+                        <input type="tel" id="referral-phone" class="form-control"
+                            placeholder="Enter referral’s phone number">
                     </div>
 
                     <div class="mb-3">
-                        <label id="language-label" for="referral-language" class="form-label">Preferred Job Language:</label>
+                        <label id="language-label" for="referral-language" class="form-label">Preferred Job
+                            Language:</label>
                         <select id="referral-language" class="form-select">
                             <option value="">Select a language</option>
                             <option value="Japanese">Japanese</option>
@@ -97,7 +116,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label id="location-label" for="referral-location" class="form-label">Preferred Location:</label>
+                        <label id="location-label" for="referral-location" class="form-label">Preferred
+                            Location:</label>
                         <select id="referral-location" class="form-select">
                             <option value="">Select a location</option>
                             <option value="Penang">Penang</option>
@@ -107,7 +127,10 @@
                         </select>
                     </div>
 
-                    <button id="submit-btn" type="submit" class="btn btn-primary w-100 mt-3">Submit Referral</button>
+                    <button id="submit-btn" type="submit" class="btn btn-primary w-100 mt-3">
+                        SUBMIT
+                    </button>
+
 
                     <div id="status" class="text-center mt-3"></div>
                 </form>
@@ -131,4 +154,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
